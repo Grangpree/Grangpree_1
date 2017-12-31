@@ -1,6 +1,10 @@
+// group + version 으로 jar, war 파일이 생성된다.
 group 'Individual'
 version '1.0-SNAPSHOT'
 
+// java project를 빌드한다고 가정하자. 그럼 source file compile -> test code -> jar 파일 생성 이렇게 3가지가 있다.
+// 그렇다면 이 모든 단계들을 java plugin이 task로 포함하고 있고 내부적으로 수행된다.
+//
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'war'
@@ -8,25 +12,34 @@ apply plugin: 'war'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-//  버전관리를 위한 static version.
-def version = [
-        spring: '4.3.4.RELEASE',
-        servletAPI: '3.1.0',
-        commonsCollections: '3.2.1',
-        junit: '4.12',
-        slf4j: '1.7.12'
-]
+// version 관리를 위한 static variable
+// 또한 ext는 프로젝트 전체 혹은 서브 프로젝트에서도 접근 가능. 반면 def는 로컬변수로 사용 된다
+ext {
+    spring: '4.3.4.RELEASE'
+    servletAPI: '3.1.0'
+    commonsCollections: '3.2.1'
+    junit: '4.12'
+    slf4j: '1.7.12'
+}
 
 repositories {
     mavenCentral()
+//    jcenter();
 }
 
+// java에서는 4가지 configuration이 존재한다.
+// compile : 프로젝트를 컴파일할 때 필요한 의존성 라이브러리들을 추가한다.
+// runtime : 프로젝트를 실행할 때 필요한 의존성 라이브러리들을 추가한다. 기본적으로 컴파일 타임을 모두 포함한다.
+// testCompile : 테스트 소스 프로젝트에서 컴파일 시 필요한 의존성을 추가한다. 기본적으로 컴파일 된 클래스들과 컴파일 의존성을 포함한다.
+// testRuntime : 테스트가 실행 될 때 필요한 의존성을 추가한다. 기본적으로 컴파일, 런타임과 테스트 컴파일의 의존성도 포함한다.
+
+// logback , mockito , spring-test dependecy 추가해야 한다.
 dependencies {
-    providedCompile "javax.servlet:javax.servlet-api:${version.servletAPI}"
-    compile "org.springframework:spring-webmvc:${version.spring}"
-    compile "org.slf4j:slf4j-api:${version.slf4j}"
-    compile group: 'commons-collections', name: 'commons-collections', version: "${version.commonsCollections}"
-    testCompile group: 'junit', name: 'junit', version: "${version.junit}"
+    providedCompile "javax.servlet:javax.servlet-api:${servletAPI}"
+    compile "org.springframework:spring-webmvc:${spring}"
+    compile "org.slf4j:slf4j-api:${slf4j}"
+    compile group: 'commons-collections', name: 'commons-collections', version: "${commonsCollections}"
+    testCompile group: 'junit', name: 'junit', version: "${junit}"
     compile 'org.projectlombok:lombok:1.16.18'
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
 }
