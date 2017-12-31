@@ -14,13 +14,13 @@ targetCompatibility = 1.8
 
 // version 관리를 위한 static variable
 // 또한 ext는 프로젝트 전체 혹은 서브 프로젝트에서도 접근 가능. 반면 def는 로컬변수로 사용 된다
-ext {
-    spring: '4.3.4.RELEASE'
-    servletAPI: '3.1.0'
-    commonsCollections: '3.2.1'
-    junit: '4.12'
-    slf4j: '1.7.12'
-}
+def version = [
+        spring: '4.3.4.RELEASE',
+        servletAPI: '3.1.0',
+        commonsCollections: '3.2.1',
+        junit: '4.12',
+        slf4j: '1.7.12'
+]
 
 repositories {
     mavenCentral()
@@ -35,13 +35,15 @@ repositories {
 
 // logback , mockito , spring-test dependecy 추가해야 한다.
 dependencies {
-    providedCompile "javax.servlet:javax.servlet-api:${servletAPI}"
-    compile "org.springframework:spring-webmvc:${spring}"
-    compile "org.slf4j:slf4j-api:${slf4j}"
-    compile group: 'commons-collections', name: 'commons-collections', version: "${commonsCollections}"
-    testCompile group: 'junit', name: 'junit', version: "${junit}"
-    compile 'org.projectlombok:lombok:1.16.18'
+    providedCompile "javax.servlet:javax.servlet-api:${version.servletAPI}"
+    compile "org.springframework:spring-webmvc:${version.spring}"
+    compile "org.slf4j:slf4j-api:${version.slf4j}"
+    compile group: 'commons-collections', name: 'commons-collections', version: "${version.commonsCollections}"
+    testCompile group: 'junit', name: 'junit', version: "${version.junit}"
+    compile 'org.projectlombok:lombok:1.16.16'
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile group: 'io.swagger', name: 'swagger-annotations', version: '2.0.0-rc2'
+
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
