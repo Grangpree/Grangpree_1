@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class HelloController {
 
-	@GetMapping("path")
-	public ResponseWrapper get() {
-		return null;
+	@GetMapping("/hello/{number}")
+	public ResponseWrapper getNumber(String number) {
+		return ResponseWrapper.success(number);
 	}
 }

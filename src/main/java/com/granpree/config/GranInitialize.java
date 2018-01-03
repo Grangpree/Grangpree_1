@@ -1,5 +1,6 @@
-package com.granpree;
+package com.granpree.config;
 
+import com.granpree.SpringConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -11,7 +12,7 @@ import javax.servlet.Filter;
 public class GranInitialize extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return null;
+		return new Class<?>[] {SpringConfig.class};
 	}
 
 	@Override

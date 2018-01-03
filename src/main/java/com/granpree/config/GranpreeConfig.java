@@ -1,4 +1,4 @@
-package com.granpree;
+package com.granpree.config;
 
 import com.granpree.controller.HelloController;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -9,14 +9,14 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.util.Locale;
 
 /**
  * Created by psmkab on 2018. 1. 2..
@@ -27,23 +27,30 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {"com.granpree.controller"})
 public class GranpreeConfig extends WebMvcConfigurerAdapter {
 
+	/**
+	 * @see : addResourceHandlers
+	 * css, js 와 같은 static resource 처리
+	 * */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/resources/**")
+				.addResourceLocations("classpath:/resources/")
+				.setCachePeriod(86400);
 	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-		localeChangeInterceptor.setParamName("lang");
-		registry.addInterceptor(localeChangeInterceptor);
+		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+		interceptor.setParamName("lang");
+		registry.addInterceptor(interceptor);
 	}
 
 	@Bean
 	public LocaleResolver localeResolver() {
-		CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
-		cookieLocaleResolver.setDefaultLocale(StringUtils.parseLocaleString("en"));
-		return cookieLocaleResolver;
+		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+		sessionLocaleResolver.setDefaultLocale(Locale.KOREA);
+
+		return sessionLocaleResolver;
 	}
 
 	@Bean
@@ -57,19 +64,8 @@ public class GranpreeConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry registry) {
-		registry.addViewController("/simpleView").setViewName("/simpleView");
-		registry.addViewController("/page-not-found").setViewName("errors/404");
-	}
-
-	@Bean
-	public MessageSource messageSource() {
-
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasenames("classpath:messages/messages", "classpath:messages/validation");
-		messageSource.setUseCodeAsDefaultMessage(true);
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setCacheSeconds(0);
-		return messageSource;
+	public void addViewControllers(ViewControllerRegistry registry) {
+		// todo : make errors directory
+		registry.addViewController("/error/**").setViewName("errors/");
 	}
 }
