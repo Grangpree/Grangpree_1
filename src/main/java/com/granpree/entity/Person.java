@@ -1,4 +1,8 @@
 package com.granpree.entity;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,46 +11,25 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     private Long id;
 
     @Column
-    private String firstname;
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private String firstName;
 
     @Column
-    private String surname;
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private String surName;
 
     public Person() {
     }
 
-    public Person(String firstname, String surname) {
-        this.firstname = firstname;
-        this.surname = surname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Person setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public Person setFirstname(String firstname) {
-        this.firstname = firstname;
-        return this;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public Person setSurname(String surname) {
-        this.surname = surname;
-        return this;
+    public Person(String firstName, String surName) {
+        this.firstName = firstName;
+        this.surName = surName;
     }
 }

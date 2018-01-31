@@ -19,11 +19,11 @@ public class QPerson extends EntityPathBase<Person> {
 
     public static final QPerson person = new QPerson("person");
 
-    public final StringPath firstname = createString("firstname");
+    public final StringPath firstName = createString("firstName");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath surname = createString("surname");
+    public final StringPath surName = createString("surName");
 
     public QPerson(String variable) {
         super(Person.class, forVariable(variable));

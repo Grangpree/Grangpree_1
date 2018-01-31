@@ -15,7 +15,7 @@ public class  PersonDao{
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("minwoo");
     private EntityManager em = emf.createEntityManager();
-    final static QPerson person  = QPerson.person;
+    static QPerson person  = QPerson.person;
 
 
     public Person save(final Person Person){
@@ -24,14 +24,14 @@ public class  PersonDao{
     }
 
 
-    public List<Person> findPersonsByFirstnameAndSurnameQueryDSL(final String firstname, final String surname) {
+    public List<Person> findPersonsByFirstnameAndSurname(final String firstname, final String surname) {
         final JPAQuery<Person> query = new JPAQuery<>(em);
 
         return query.from(person).where(person.firstname.eq(firstname).and(person.surname.eq(surname))).fetch();
     }
 
 
-    public List<Person> findPersonsByFirstnameQueryDSL(final String firstname){
+    public List<Person> findPersonsByFirstname(final String firstname){
         final JPAQuery<Person> query = new JPAQuery<>(em);
 
         return query.from(person).where(person.firstname.eq(firstname)).fetch();
