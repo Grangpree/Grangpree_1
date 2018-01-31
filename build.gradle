@@ -46,20 +46,14 @@ dependencies {
     compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2'
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
 
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
 
-    // https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.1.1'
 
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.2.20.Final'
 
-    // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
     compile group: 'com.querydsl', name: 'querydsl-jpa', version: '4.1.4'
-    // https://mvnrepository.com/artifact/com.mysema.querydsl/querydsl-apt
     compile group: 'com.querydsl', name: 'querydsl-apt', version: '4.1.4'
-    // https://mvnrepository.com/artifact/com.mysema.querydsl/querydsl-core
     compile group: 'com.querydsl', name: 'querydsl-core', version: '4.1.4'
 
 }
