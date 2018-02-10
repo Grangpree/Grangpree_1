@@ -31,6 +31,7 @@ public class GranpreeConfig extends WebMvcConfigurerAdapter {
 	 * @see : addResourceHandlers
 	 * css, js 와 같은 static resource 처리
 	 * */
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**")
