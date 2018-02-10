@@ -10,6 +10,6 @@ public class DaoTest {
     public static void main(String[] args) {
         PersonDao dao = new PersonDao();
         List<Person> personList = dao.findPersonsByFirstname("kang");
-        System.out.println(personList.get(0).getFirstname());
+        System.out.println(personList.get(0).getFirstName());
     }
 }
