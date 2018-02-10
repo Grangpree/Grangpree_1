@@ -7,22 +7,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "person")
+@Getter
+@Setter(AccessLevel.PRIVATE)
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter(AccessLevel.PRIVATE)
     private Long id;
 
     @Column
-    @Getter
-    @Setter(AccessLevel.PRIVATE)
     private String firstName;
 
     @Column
-    @Getter
-    @Setter(AccessLevel.PRIVATE)
     private String surName;
 
     public Person() {

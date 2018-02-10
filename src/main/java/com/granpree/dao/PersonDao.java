@@ -23,17 +23,25 @@ public class  PersonDao{
         return Person;
     }
 
+/*
 
     public List<Person> findPersonsByFirstnameAndSurname(final String firstname, final String surname) {
         final JPAQuery<Person> query = new JPAQuery<>(em);
 
         return query.from(person).where(person.firstname.eq(firstname).and(person.surname.eq(surname))).fetch();
     }
+*/
+
+    public List<Person> findPersonsByFirstnameAndSurname(final String firstname, final String surname) {
+        final JPAQuery<Person> query = new JPAQuery<>(em);
+
+        return query.from(person).where(person.firstName.eq(firstname).and(person.surName.eq(surname))).fetch();
+    }
 
 
     public List<Person> findPersonsByFirstname(final String firstname){
         final JPAQuery<Person> query = new JPAQuery<>(em);
 
-        return query.from(person).where(person.firstname.eq(firstname)).fetch();
+        return query.from(person).where(person.firstName.eq(firstname)).fetch();
     }
 }
