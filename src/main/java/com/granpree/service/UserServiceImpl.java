@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-//    @Autowired
-//    private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ResponseWrapper join(UserJoinDTO userJoinDTO) {

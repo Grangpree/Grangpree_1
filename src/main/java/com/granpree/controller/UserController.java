@@ -4,18 +4,15 @@ package com.granpree.controller;
 import com.granpree.dto.UserJoinDTO;
 import com.granpree.dto.UserLoginInfoDTO;
 import com.granpree.service.UserService;
-import com.granpree.service.UserServiceImpl;
-import com.granpree.utils.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/user")
+@RestController
 public class UserController {
 
     @Autowired
