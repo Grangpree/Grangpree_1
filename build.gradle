@@ -8,6 +8,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -58,6 +59,8 @@ dependencies {
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
 
+
+
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -65,12 +68,18 @@ dependencies {
 
 //Generate Source with QueryDSL
 sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java"]
+        }
+    }
     generated {
         java {
-            srcDirs =  ["src/generated"]
+            srcDirs =  ["src/generated/java"]
         }
     }
 }
+
 configurations {
     querydslapt
 }
