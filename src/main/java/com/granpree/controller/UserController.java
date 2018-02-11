@@ -4,6 +4,7 @@ package com.granpree.controller;
 import com.granpree.dto.UserJoinDTO;
 import com.granpree.dto.UserLoginInfoDTO;
 import com.granpree.service.UserService;
+import com.granpree.service.UserServiceImpl;
 import com.granpree.utils.ResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/test")
+    public void test() {
+        System.out.println("test");
+    }
+
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public ResponseWrapper join(@RequestParam @Valid UserJoinDTO userJoinDTO) {
-        return userService.join(userJoinDTO);
+    public void join(@RequestParam @Valid UserJoinDTO userJoinDTO) {
+        userService.join(userJoinDTO);
     }
 
     @RequestMapping(value = "/login")
-    public ResponseWrapper login(@RequestParam @Valid UserLoginInfoDTO userLoginInfoDTO) {
-        return userService.login(userLoginInfoDTO);
+    public void login(@RequestParam @Valid UserLoginInfoDTO userLoginInfoDTO) {
+        userService.login(userLoginInfoDTO);
     }
 }
